@@ -23,7 +23,7 @@ variable "keyname" {
 # Default AWS region
 #
 variable "region" {
-   default = "us-west-1"
+   default = "us-east-2"
 }
 
 #
@@ -37,13 +37,13 @@ variable "ami_id" {
   //default = "ami-0bcc094591f354be2"
 
   // us-east-2
-  //default = "ami-0e82959d4ed12de3f"
+  default = "ami-0e82959d4ed12de3f"
 
   // eu-west-1
   //default = "ami-0e66021c377d8c8b4"
 
   // us-west-1
-  default = "ami-0e17790f211795d99"
+  //default = "ami-0e17790f211795d99"
 }
 
 #

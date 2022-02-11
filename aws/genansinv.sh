@@ -136,9 +136,9 @@ pmsg "[dse_app:vars]" $DSE_ANSINV_FILE
 pmsg "cluster_name=$DSE_APPCLUSTER_NAME" $DSE_ANSINV_FILE
 pmsg "" $DSE_ANSINV_FILE
 pmsg "[dse_app_dc1:vars]" $DSE_ANSINV_FILE
-pmsg "solr_enabled=0" $DSE_ANSINV_FILE
+pmsg "solr_enabled=1" $DSE_ANSINV_FILE
 pmsg "spark_enabled=0" $DSE_ANSINV_FILE
-pmsg "graph_enabled=0" $DSE_ANSINV_FILE
+pmsg "graph_enabled=1" $DSE_ANSINV_FILE
 pmsg "auto_bootstrap=1" $DSE_ANSINV_FILE
 pmsg "internal_auth_enabled=1" $DSE_ANSINV_FILE
 pmsg "" $DSE_ANSINV_FILE
