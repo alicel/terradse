@@ -44,6 +44,22 @@ The scripts in this repository have 3 major parts:
 
 ---
 ---
+# Artemis version
+
+The Artemis branch of this repo has been modified to support the creation of a cluster defined as Origin or Target, with Search and Graph enabled.
+(Note that, in line with the plans for Artemis, Spark is not enabled).
+
+The automation creates one cluster at a time of the desired type and using the specified DSE version.
+
+When running the Terraform automation, you will be prompted to enter O if you wish to create an Origin cluster, or T if you want a Target cluster.
+This will tag the AWS resources with the appropriate prefix, and will also create a dedicated VPC and subnets (non-overlapping ranges are automatically used for Origin and Target).
+
+The script that generates the hosts file (`genansinv.sh`) does not require any extra parameter.
+
+When running the Ansible automation, the same prompt as above will appear and you will have to specify again if the cluster is Origin or Target. 
+This will be fixed shortly so that you are prompted only once.
+
+The name of the cluster will be set according to whether it is Origin or Target, and the desired cluster version can be specified in `group_vars/origin` or `group_vars/target` respectively.
 
 # TL;DR
 
@@ -53,17 +69,17 @@ First generated an ssh keypair
 ssh-keygen -t rsa
 ```
 
-File for generated key should be `~/.ssh/origin_key`
+File for generated key should be `~/.ssh/cluster_key`
 
 ```
 cd aws
-# run terraform script to create aws infrastructure
+# run terraform script to create the AWS infrastructure (answer the prompt on whether the cluster is Origin or Target)
 ./runterra.sh
 
 # generate ansible inventory based on terraform created servers
 ./genansinv.sh
 
-# run ansible to install dse cluster
+# run ansible to install dse cluster (answer the prompt on whether the cluster is Origin or Target)
 ./runansi.sh
 
 # connect to instance to check nodetool status for instance
@@ -76,6 +92,8 @@ cqlsh `hostname -I` -u cassandra -p cassandra
 
 ---
 ---
+
+# Note: the instructions below may be slightly out of date.
 
 # 2. Terraform Introduction and Cluster Topology
 
