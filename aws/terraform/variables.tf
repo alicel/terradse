@@ -9,7 +9,7 @@ variable "ssh_key_localpath" {
 # The local private SSH key file name 
 #
 variable "ssh_key_filename" {
-   default = "origin_key"
+   default = "cluster_key"
 }
 
 #
@@ -50,8 +50,7 @@ variable "ami_id" {
 # AWS resource tag identifier
 #
 variable "tag_identifier" {
-   default = "origin"
-} 
+}
 
 #
 # Environment description
@@ -61,18 +60,13 @@ variable "env" {
 }
 
 ## CIDR for VPC and subnets
-variable "vpc_cidr_str_vpc" {
-   default = "191.100.0.0/16"
-}
-variable "vpc_cidr_str_cassapp" {
-   default = "191.100.20.0/24"
-}
+variable "vpc_cidr_str_vpc" {}
+
+variable "vpc_cidr_str_cassapp" {}
 //variable "vpc_cidr_str_solrspark" {
 //   default = "191.100.30.0/24"
 //}
-variable "vpc_cidr_str_userapp" {
-   default = "191.100.40.0/24"
-}
+variable "vpc_cidr_str_userapp" {}
 
 #
 # OpsCenter and DSE workload type string for

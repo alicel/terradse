@@ -103,10 +103,6 @@ if [[ "$1" != "" ]]; then
    SEED_PER_DC="$1"
 fi
 
-
-DSE_APPCLUSTER_NAME="OriginCluster"
-
-
 # Generate Ansible inventory file for multi-DC DSE cluster (no OpsCenter)
 DSE_ANSINV_FILE="dse_ansHosts"
 
@@ -132,8 +128,8 @@ do
 done
 pmsg "" $DSE_ANSINV_FILE
 
-pmsg "[dse_app:vars]" $DSE_ANSINV_FILE
-pmsg "cluster_name=$DSE_APPCLUSTER_NAME" $DSE_ANSINV_FILE
+#pmsg "[dse_app:vars]" $DSE_ANSINV_FILE
+#pmsg "cluster_name=$DSE_APPCLUSTER_NAME" $DSE_ANSINV_FILE
 pmsg "" $DSE_ANSINV_FILE
 pmsg "[dse_app_dc1:vars]" $DSE_ANSINV_FILE
 pmsg "solr_enabled=1" $DSE_ANSINV_FILE

@@ -17,8 +17,10 @@
   any_errors_fatal: true
   become: true
   become_method: sudo
-  vars:
-    cluster_name: OriginCluster
+  vars_files:
+    - "group_vars/all"
+    - "group_vars/{{ cluster_mode }}"
+
   roles:
     - { role: openjdk8_inst }
     - { role: dse_common }

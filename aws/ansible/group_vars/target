@@ -1,0 +1,13 @@
+## Target DSE cluster name and version
+
+cluster_name: TargetCluster
+
+#dse_ver_major: 5.1
+#dse_ver_minor: 26
+#dse_ver_major: 6.0
+#dse_ver_minor: 12
+#dse_ver_major: 6.7
+#dse_ver_minor: 9
+dse_ver_major: 6.8
+dse_ver_minor: 19
+dse_ver_target:  "{{ dse_ver_major }}.{{ dse_ver_minor }}"

@@ -2,25 +2,6 @@
 # Home directory for backup 
 backup_homedir: /home/automaton/dse_update_bkup
 
-### Target/Current DSE version
-#   - dse_ver_target:
-#     for fresh install, dse_ver_target is the version to be installed
-#     for upgrade, dse_ver_target is the version to be upgraded to
-#
-#dse_ver_major: 5.1
-#dse_ver_minor: 26
-#dse_ver_major: 6.0
-#dse_ver_minor: 12
-#dse_ver_major: 6.7
-#dse_ver_minor: 9
-dse_ver_major: 6.8
-dse_ver_minor: 19
-dse_ver_target:  "{{ dse_ver_major }}.{{ dse_ver_minor }}"
-
-#opsc_ver_target: 6.7.8
-opsc_ver_target: 6.8.4
-
-
 ### DSE system file location
 #
 dse_config_dir: /etc/dse/
@@ -33,9 +14,8 @@ dse_syslog_dir: /var/log/cassandra
 # default vnode token_num setting for C*
 vnode_token_num: 8
 
-## DSE cluster name and other configuration items
+## DSE configuration items
 #
-cluster_name: OriginCluster
 dse_data_homedir: /home/automaton/dse_data
 data_file_directories: "{{ dse_data_homedir }}/cassandra"
 commitlog_directory: "{{ dse_data_homedir }}/commitlog"
