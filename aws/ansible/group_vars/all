@@ -45,7 +45,7 @@ cdc_raw_directory: "{{ dse_data_homedir }}/cdc_raw"
 metadata_directory: "{{ dse_data_homedir }}/metadata"
 
 # Partitioner [possible values: org.apache.cassandra.dht.Murmur3Partitioner (default), org.apache.cassandra.dht.RandomPartitioner]
-partitioner: org.apache.cassandra.dht.RandomPartitioner
+partitioner: org.apache.cassandra.dht.Murmur3Partitioner
 
 ## Block device string (xvd...) for the EBS 
 #    volume attached for DSE data
