@@ -14,7 +14,7 @@ backup_homedir: /home/automaton/dse_update_bkup
 #dse_ver_major: 6.7
 #dse_ver_minor: 9
 dse_ver_major: 6.8
-dse_ver_minor: 19
+dse_ver_minor: 23
 dse_ver_target:  "{{ dse_ver_major }}.{{ dse_ver_minor }}"
 
 #opsc_ver_target: 6.7.8
@@ -44,6 +44,8 @@ hints_directory: "{{ dse_data_homedir }}/hints"
 cdc_raw_directory: "{{ dse_data_homedir }}/cdc_raw"
 metadata_directory: "{{ dse_data_homedir }}/metadata"
 
+# Partitioner [possible values: org.apache.cassandra.dht.Murmur3Partitioner (default), org.apache.cassandra.dht.RandomPartitioner]
+partitioner: org.apache.cassandra.dht.RandomPartitioner
 
 ## Block device string (xvd...) for the EBS 
 #    volume attached for DSE data

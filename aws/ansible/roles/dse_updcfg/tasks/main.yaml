@@ -51,6 +51,15 @@
     group: cassandra
     mode: 0644
 
+- name: Configure partitioner
+  lineinfile:
+    name: "{{ dse_config_dir }}/cassandra/cassandra.yaml"
+    regexp: 'partitioner\:'
+    line: "partitioner: {{ partitioner }}"
+    owner: cassandra
+    group: cassandra
+    mode: 0644
+
 - name: Create Cassandra directories for data, commitlog, saved_caches
   file:
     path: "{{ item }}"
