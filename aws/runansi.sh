@@ -13,7 +13,7 @@ cd ansible
 echo
 echo ">>>> Setup DSE application cluster <<<<"
 echo
-ansible-playbook -i hosts dse_app_install.yaml --private-key=~/.ssh/origin_key -u ubuntu
+ansible-playbook -i hosts dse_app_install.yaml --private-key=~/ZDM_Enablement/CampConstellation/OriginKey/origin-camp-const-key -u ubuntu
 echo
 
 cd ..

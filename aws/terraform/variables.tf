@@ -1,15 +1,22 @@
 #
+# The AWS profile to be used to provision the infrastructure
+#
+variable "aws_profile" {
+   default = "ds-camp-constellation"
+}
+
+#
 # The local directory where the SSH key files are stored
 #
 variable "ssh_key_localpath" {
-   default = "~/.ssh"
+   default = "..."
 }
 
 #
 # The local private SSH key file name 
 #
 variable "ssh_key_filename" {
-   default = "origin_key"
+   default = "..."
 }
 
 #
@@ -23,7 +30,7 @@ variable "keyname" {
 # Default AWS region
 #
 variable "region" {
-   default = "us-west-1"
+   default = "us-west-2"
 }
 
 #
@@ -43,7 +50,10 @@ variable "ami_id" {
   //default = "ami-0e66021c377d8c8b4"
 
   // us-west-1
-  default = "ami-0e17790f211795d99"
+  //default = "ami-0e17790f211795d99"
+
+   // us-west-2
+   default = "ami-07e60b7f43b05d68e"
 }
 
 #
@@ -101,7 +111,7 @@ variable "instance_count" {
    default = {
       dse_app_dc1 = 3
       //dse_app_dc2 = 3
-      user_application_client = 2 
+      user_application_client = 20
    }
 }
 
