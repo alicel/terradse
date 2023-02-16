@@ -118,6 +118,12 @@ variable "dse_node_root_volume_size_gb" {
    default = 100
 }
 
-variable "owner" {
+variable "cluster_owner" {
    default = "all"
 }
+
+variable "client_app_server_owner" {
+   default = "user"
+}
+
+

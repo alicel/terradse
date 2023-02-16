@@ -19,7 +19,7 @@ resource "aws_instance" "dse_app_dc1" {
 
    tags = {
       Name         = "${var.tag_identifier}-${var.dse_app_dc1_type}-${count.index}"
-      Owner        = var.owner
+      Owner        = var.cluster_owner
       Environment  = var.env 
    }  
 
@@ -42,7 +42,7 @@ resource "aws_instance" "user_application_client" {
 
    tags = {
       Name         = "${var.tag_identifier}-${var.user_application_client_type}-${count.index}"
-      Owner        = "user${count.index}"
+      Owner        = "${var.client_app_server_owner}${count.index}"
       Environment  = var.env
    }
 
