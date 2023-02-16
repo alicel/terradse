@@ -18,7 +18,7 @@ resource "aws_instance" "dse_app_dc1" {
    ]
 
    tags = {
-      Name         = "${var.tag_identifier}-${var.dse_app_dc1_type}-${count.index}"
+      Name         = "${var.tag_identifier}-${var.dse_app_dc1_type}-node${count.index}"
       Owner        = var.cluster_owner
       Environment  = var.env 
    }  

@@ -97,13 +97,14 @@ resource "aws_security_group" "sg_dse_node" {
       security_groups = [aws_security_group.sg_internal_only.id]
    }
 
-   # Rule added to enable the Cloudgate proxy to connect to the DSE nodes over VPC peering
+   # Rule added to enable the ZDM proxy to connect to the DSE nodes over VPC peering
+   # Allows any VPC with CIDR 172.xxx.xxx.xxx
    # Native transport port
    ingress {
       from_port = 9042
       to_port = 9042
       protocol = "tcp"
-      cidr_blocks = ["172.18.0.0/16"]
+      cidr_blocks = ["172.0.0.0/8"]
    }
 
    # Native transport port, with SSL
