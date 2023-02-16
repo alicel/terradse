@@ -109,7 +109,7 @@ variable "user_application_client_type" {
 variable "instance_count" {
    type = map
    default = {
-      dse_app_dc1 = 3
+      dc1 = 3
       //dse_app_dc2 = 3
       client_app_server = 5
    }
@@ -118,7 +118,7 @@ variable "instance_count" {
 variable "instance_type" {
    type = map
    default = {
-      dse_app_dc1 = "t2.2xlarge"
+      dc1 = "t2.2xlarge"
       //dse_app_dc2 = "t2.2xlarge"
       client_app_server = "t2.large"
    }
