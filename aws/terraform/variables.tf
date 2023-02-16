@@ -85,7 +85,7 @@ variable "vpc_cidr_str_userapp" {
 # 
 
 variable "dse_app_dc1_type" {
-   default = "dse_app_dc1"
+   default = "dc1"
 }
 /*
 variable "dse_app_dc2_type" {
@@ -93,7 +93,7 @@ variable "dse_app_dc2_type" {
 }
 */
 variable "user_application_client_type" {
-   default = "user_application_client"
+   default = "client_app_server"
 }
 
 variable "instance_count" {
@@ -112,4 +112,12 @@ variable "instance_type" {
       //dse_app_dc2 = "t2.2xlarge"
       user_application_client = "t2.large"
    }
+}
+
+variable "dse_node_root_volume_size_gb" {
+   default = 100
+}
+
+variable "owner" {
+   default = "all"
 }

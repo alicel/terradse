@@ -5,7 +5,7 @@ resource "aws_instance" "dse_app_dc1" {
    ami            = var.ami_id
    instance_type  = lookup(var.instance_type, var.dse_app_dc1_type)
    root_block_device {
-      volume_size = 100
+      volume_size = var.dse_node_root_volume_size_gb
    }
    count          = lookup(var.instance_count, var.dse_app_dc1_type)
    key_name       = aws_key_pair.dse_terra_ssh.key_name
@@ -19,6 +19,7 @@ resource "aws_instance" "dse_app_dc1" {
 
    tags = {
       Name         = "${var.tag_identifier}-${var.dse_app_dc1_type}-${count.index}"
+      Owner        = var.owner
       Environment  = var.env 
    }  
 
@@ -41,6 +42,7 @@ resource "aws_instance" "user_application_client" {
 
    tags = {
       Name         = "${var.tag_identifier}-${var.user_application_client_type}-${count.index}"
+      Owner        = "user${count.index}"
       Environment  = var.env
    }
 
