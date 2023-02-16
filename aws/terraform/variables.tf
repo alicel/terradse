@@ -1,22 +1,15 @@
 #
-# The AWS profile to be used to provision the infrastructure
-#
-variable "aws_profile" {
-   default = "ds-zdm-learning-day"
-}
-
-#
 # The local directory where the SSH key files are stored
 #
 variable "ssh_key_localpath" {
-   default = "..."
+   default = "~/.ssh"
 }
 
 #
 # The local private SSH key file name 
 #
 variable "ssh_key_filename" {
-   default = "..."
+   default = "origin_key"
 }
 
 #
@@ -111,7 +104,7 @@ variable "instance_count" {
    default = {
       dse_app_dc1 = 3
       //dse_app_dc2 = 3
-      user_application_client = 20
+      client_app_server = 2
    }
 }
 
@@ -120,7 +113,7 @@ variable "instance_type" {
    default = {
       dse_app_dc1 = "t2.2xlarge"
       //dse_app_dc2 = "t2.2xlarge"
-      user_application_client = "t2.large"
+      client_app_server = "t2.large"
    }
 }
 
