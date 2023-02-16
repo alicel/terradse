@@ -53,7 +53,7 @@ variable "ami_id" {
   //default = "ami-0e17790f211795d99"
 
    // us-west-2
-   default = "ami-07e60b7f43b05d68e"
+   default = "ami-0a97be4c4be6d6cc4"
 }
 
 #
