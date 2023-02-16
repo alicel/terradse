@@ -60,11 +60,17 @@ resource "aws_route" "user_app_to_igw" {
 # Create subnets
 #
 
+# Get available AZs
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 # Subnet for DSE core - application cluster
 resource "aws_subnet" "sn_dse_cassapp" {    
     vpc_id                  = aws_vpc.vpc_dse.id
     cidr_block              = var.vpc_cidr_str_cassapp
     map_public_ip_on_launch = true
+    availability_zone= data.aws_availability_zones.available.names[0]
 
     tags = {
         Name = "${var.tag_identifier}-sn_dse_cassapp"
@@ -96,6 +102,7 @@ resource "aws_route_table_association" "rt_assoc_sn_dse_solrspark" {
 resource "aws_subnet" "sn_user_app" {
   vpc_id                  = aws_vpc.vpc_dse.id
   cidr_block              = var.vpc_cidr_str_userapp
+  availability_zone= data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = true
 
   tags = {
