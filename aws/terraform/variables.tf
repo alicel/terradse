@@ -2,7 +2,7 @@
 # The AWS profile to be used to provision the infrastructure
 #
 variable "aws_profile" {
-   default = "ds-camp-constellation"
+   default = "ds-zdm-learning-day"
 }
 
 #
