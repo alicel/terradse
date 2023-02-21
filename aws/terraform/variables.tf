@@ -2,7 +2,7 @@
 # The AWS profile to be used to provision the infrastructure
 #
 variable "aws_profile" {
-   default = "ds-zdm-learning-day"
+   default = "ds-zdm-immersion-day"
 }
 
 #
@@ -103,7 +103,7 @@ variable "dse_app_dc2_type" {
 }
 */
 variable "user_application_client_type" {
-   default = "client_app_server"
+   default = "app_client"
 }
 
 variable "instance_count" {
@@ -111,7 +111,7 @@ variable "instance_count" {
    default = {
       dc1 = 3
       //dse_app_dc2 = 3
-      client_app_server = 5
+      app_client = 10
    }
 }
 
@@ -120,7 +120,7 @@ variable "instance_type" {
    default = {
       dc1 = "t2.2xlarge"
       //dse_app_dc2 = "t2.2xlarge"
-      client_app_server = "t2.large"
+      app_client = "t2.large"
    }
 }
 
@@ -130,7 +130,7 @@ variable "dse_node_root_volume_size_gb" {
 }
 
 variable "cluster_owner" {
-   default = "all"
+   default = "shared"
 }
 
 variable "client_app_server_owner" {
