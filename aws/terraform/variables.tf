@@ -133,7 +133,7 @@ variable "cluster_owner" {
    default = "shared"
 }
 
-variable "client_app_server_owner" {
+variable "app_client_owner" {
    default = "user"
 }
 

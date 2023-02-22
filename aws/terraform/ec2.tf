@@ -42,7 +42,7 @@ resource "aws_instance" "user_application_client" {
 
    tags = {
       Name         = "${var.tag_identifier}-${var.user_application_client_type}-${count.index}"
-      Owner        = "${var.client_app_server_owner}${count.index}"
+      Owner        = "${var.app_client_owner}${count.index}"
       Environment  = var.env
    }
 
