@@ -1,3 +1,8 @@
+- name: Remove cqlsh-astra
+  file:
+    path: /home/ubuntu/cqlsh-astra/bin/cqlsh
+    state: absent
+
 - name: Download cqlsh-astra tar archive
   get_url:
     url: https://downloads.datastax.com/enterprise/cqlsh-astra.tar.gz
@@ -8,3 +13,8 @@
     src: /home/ubuntu/cqlsh-astra.tar.gz
     dest: /home/ubuntu/
     remote_src: yes
+
+- name: Remove archive
+  file:
+    path: /home/ubuntu/cqlsh-astra.tar.gz
+    state: absent

@@ -1,0 +1,14 @@
+- name: Get home directory listing
+  find:
+    path: "/home/ubuntu/"
+    file_type: any
+    hidden: no
+  register: home_dir_content_result
+
+- name: Remove home directory content
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ home_dir_content_result.files }}"
+  loop_control:
+    label: "{{ item.path }}"

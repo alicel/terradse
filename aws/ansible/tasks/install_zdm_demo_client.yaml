@@ -1,0 +1,8 @@
+- name: Remove the ZDM Demo Client directory if present
+  file:
+    path: /home/ubuntu/zdm-demo-client/
+    state: absent
+- name: Clone the ZDM Demo client repo
+  git:
+    repo: https://github.com/alicel/zdm-demo-client.git
+    dest: /home/ubuntu/zdm-demo-client/

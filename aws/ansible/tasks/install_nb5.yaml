@@ -1,9 +1,21 @@
+- name: Remove nb5
+  file:
+    path: /home/ubuntu/nb5
+    state: absent
+
 - name: Download nb if not installed
   command: curl -LJO# -H 'Accept:application/octet-stream' "https://github.com/nosqlbench/nosqlbench/releases/download/5.17.1-release/nb5?access_token=dd3d2a7b4b38744b09e5d08ea32aa822cb7be462"
+
 - name: Make nb executable
   file:
     path: /home/ubuntu/nb5
     mode: a+x
+
+- name: Remove activities directory
+  file:
+    path: /home/ubuntu/activities/
+    state: absent
+
 - name: Create activities directory and upload cql-keyvalue-astra activity
   copy:
     src: assets/cql-keyvalue-astra.yaml

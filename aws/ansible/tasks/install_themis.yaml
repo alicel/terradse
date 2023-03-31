@@ -1,0 +1,16 @@
+- name: Remove the existing Themis installation if present
+  file:
+    path: /home/ubuntu/themis/
+    state: absent
+- name: Remove the Themis configuration file if it exists
+  file:
+    path: /home/ubuntu/.themis.yaml
+    state: absent
+- name: Clone the Themis repo
+  git:
+    repo: https://github.com/absurdfarce/themis.git
+    dest: /home/ubuntu/themis/
+- name: Build Themis
+  command:
+    chdir: "/home/ubuntu/themis/"
+    cmd:  "./gradlew shadowJar"
