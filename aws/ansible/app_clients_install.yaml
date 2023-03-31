@@ -1,0 +1,97 @@
+# Top-level playbook that initialises the application client instances for the ZDM Immersion Day training
+#
+# Requires an inventory file with a group called "clients" containing the public IPs of the application client instances, because we do not have a jumphost.
+# These are not EIPs so they will have to be changed every time.
+#
+# Things that it does:
+# - Install OpenJDK 11 and Maven
+# - Install Docker engine
+# - Install CQLSH
+# - Install NoSQLBench, create activity folder, upload activity
+# - Clone ZDM Demo Client
+# - Clone Themis and build it
+
+---
+- name: Install Java packages and Docker engine
+  hosts: clients
+  become: yes
+
+  tasks:
+    - name: Install OpenJDK and Maven if not yet present
+      apt:
+        update_cache: yes
+        name: "{{ java_packages }}"
+        state: present
+      vars:
+        java_packages: [ 'openjdk-11-jdk', 'maven' ]
+
+    - name: Clean up the Docker test container if it exists
+      docker_container:
+        name: "test"
+        state: absent
+    - name: Check if Docker Engine is already installed
+      command: docker run --name test hello-world
+      register: docker_installed
+      ignore_errors: yes
+    - name: Install Docker Engine if not already present
+      include_tasks: tasks/install_docker.yml
+      when: docker_installed.failed
+    - name: Clean up the Docker test container if it exists
+      docker_container:
+        name: "test"
+        state: absent
+
+- name: Install all CQL clients
+  hosts: clients
+
+  tasks:
+    - name: Check if cqlsh-astra has already been installed
+      stat:
+        path: /home/ubuntu/cqlsh-astra/bin/cqlsh
+      register: cqlsh_installed
+    - name: Install cqlsh-astra if not yet present
+      include_tasks: tasks/install_cqlsh.yml
+      when: not cqlsh_installed.stat.exists
+
+    - name: Check if NoSQLBench 5 is already installed
+      stat:
+        path: /home/ubuntu/nb5
+      register: nb5_installed
+    - name: Install nb5 if it is not yet present
+      include_tasks: tasks/install_nb5.yml
+      when: not nb5_installed.stat.exists
+
+    - name: Remove the ZDM Demo Client directory if present
+      file:
+        path: /home/ubuntu/zdm-demo-client/
+        state: absent
+    - name: Clone the ZDM Demo client repo
+      git:
+        repo: https://github.com/alicel/zdm-demo-client.git
+        dest: /home/ubuntu/zdm-demo-client/
+
+    - name: Remove the existing Themis installation if present
+      file:
+        path: /home/ubuntu/themis/
+        state: absent
+    - name: Remove the Themis configuration file if it exists
+      file:
+        path: /home/ubuntu/.themis.yaml
+        state: absent
+    - name: Clone the Themis repo
+      git:
+        repo: https://github.com/absurdfarce/themis.git
+        dest: /home/ubuntu/themis/
+    - name: Build Themis
+      command:
+        chdir: "/home/ubuntu/themis/"
+        cmd:  "./gradlew shadowJar"
+
+
+
+
+
+
+
+
+

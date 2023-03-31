@@ -1,0 +1,10 @@
+- name: Download cqlsh-astra tar archive
+  get_url:
+    url: https://downloads.datastax.com/enterprise/cqlsh-astra.tar.gz
+    dest: /home/ubuntu/cqlsh-astra.tar.gz
+
+- name: Uncompress cqlsh-astra
+  unarchive:
+    src: /home/ubuntu/cqlsh-astra.tar.gz
+    dest: /home/ubuntu/
+    remote_src: yes
