@@ -6,7 +6,7 @@ variable "aws_profile" {
 }
 
 #
-# The local directory where the SSH key files are stored
+# The local directory where the SSH key files are stored. Note: just the path, without the key filename
 #
 variable "ssh_key_localpath" {
    default = "..."
