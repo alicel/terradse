@@ -5,6 +5,7 @@ resource "aws_instance" "dse_app_dc1" {
    ami            = var.ami_id
    instance_type  = lookup(var.instance_type, var.dse_app_dc1_type)
    root_block_device {
+      volume_type = "gp2"
       volume_size = var.dse_node_root_volume_size_gb
    }
    count          = lookup(var.instance_count, var.dse_app_dc1_type)
