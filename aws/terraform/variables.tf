@@ -2,21 +2,21 @@
 # The AWS profile to be used to provision the infrastructure
 #
 variable "aws_profile" {
-   default = "ds-zdm-immersion-day"
+   default = "astra-conn"
 }
 
 #
 # The local directory where the SSH key files are stored. Note: just the path, without the key filename
 #
 variable "ssh_key_localpath" {
-   default = "..."
+   default = "~/.ssh"
 }
 
 #
 # The local private SSH key file name
 #
 variable "ssh_key_filename" {
-   default = "origin-immersday-key"
+   default = "origin-sdl"
 }
 
 #
@@ -30,37 +30,37 @@ variable "keyname" {
 # Default AWS region
 #
 variable "region" {
-   default = "us-west-2"
+   default = "us-east-1"
 }
 
 #
 # Default OS image: Ubuntu
 #
 variable "ami_id" {
-   
-  # Ubuntu Server 18.04 LTS (HVM), SSD Volume Type (64-bit x86)
 
-  // us-east-1
-  //default = "ami-0bcc094591f354be2"
+   # Ubuntu Server 22.04 LTS (HVM), SSD Volume Type (64-bit x86), AMD
 
-  // us-east-2
-  //default = "ami-0e82959d4ed12de3f"
+   // us-east-1
+   default = "ami-0c7217cdde317cfec"
 
-  // eu-west-1
-  //default = "ami-0e66021c377d8c8b4"
+   // us-east-2
+   //default = "ami-05fb0b8c1424f266b"
 
-  // us-west-1
-  //default = "ami-0e17790f211795d99"
+   // eu-west-1
+   //default = "ami-0905a3c97561e0b69"
+
+   // us-west-1
+   //default = "ami-0ce2cb35386fc22e9"
 
    // us-west-2
-   default = "ami-0a97be4c4be6d6cc4"
+   //default = "ami-008fe2fc65df48dac"
 }
 
 #
 # AWS resource tag identifier
 #
 variable "tag_identifier" {
-   default = "origin"
+   default = "origin-sideloader"
 } 
 
 #
@@ -77,9 +77,7 @@ variable "vpc_cidr_str_vpc" {
 variable "vpc_cidr_str_cassapp" {
    default = "191.100.20.0/24"
 }
-//variable "vpc_cidr_str_solrspark" {
-//   default = "191.100.30.0/24"
-//}
+
 variable "vpc_cidr_str_userapp" {
    default = "191.100.40.0/24"
 }
@@ -97,11 +95,7 @@ variable "vpc_cidr_str_userapp" {
 variable "dse_app_dc1_type" {
    default = "dc1"
 }
-/*
-variable "dse_app_dc2_type" {
-   default = "dse_app_dc2"
-}
-*/
+
 variable "user_application_client_type" {
    default = "app_client"
 }
@@ -110,23 +104,21 @@ variable "instance_count" {
    type = map
    default = {
       dc1 = 3
-      //dse_app_dc2 = 3
-      app_client = 10
+      app_client = 8
    }
 }
 
 variable "instance_type" {
    type = map
    default = {
-      dc1 = "t2.2xlarge"
-      //dse_app_dc2 = "t2.2xlarge"
-      app_client = "t2.large"
+      dc1 = "r6a.4xlarge"
+      app_client = "c6a.4xlarge"
    }
 }
 
 variable "dse_node_root_volume_size_gb" {
    // NOTE the default is 2TB - adjust as needed
-   default = 2000
+   default = 3000
 }
 
 variable "cluster_owner" {
