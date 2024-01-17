@@ -10,10 +10,6 @@ resource "aws_vpc" "vpc_dse" {
    }
 }
 
-data "aws_availability_zones" "available" {
-  state = "available"
-}
-
 ######################################################
 # Create an internet gateway for public/internet access
 #
@@ -63,6 +59,11 @@ resource "aws_route" "user_app_to_igw" {
 # Create subnets
 #
 
+# Get available AZs
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 # Subnet for DSE core - application cluster
 resource "aws_subnet" "sn_dse_cassapp" {    
     vpc_id                  = aws_vpc.vpc_dse.id
@@ -78,23 +79,6 @@ resource "aws_route_table_association" "rt_assoc_sn_dse_cassapp" {
     route_table_id          = aws_route_table.rt_dse.id
     subnet_id               = aws_subnet.sn_dse_cassapp.id
 }
-
-# Subnet for DSE advanced workloads - application cluster
-/*
-resource "aws_subnet" "sn_dse_solrspark" {    
-    vpc_id                  = aws_vpc.vpc_dse.id
-    cidr_block              = var.vpc_cidr_str_solrspark
-    map_public_ip_on_launch = true
-
-    tags = {
-        Name = "${var.tag_identifier}-sn_dse_solrspark"
-    }
-}
-resource "aws_route_table_association" "rt_assoc_sn_dse_solrspark" {
-    route_table_id          = aws_route_table.rt_dse.id
-    subnet_id               = aws_subnet.sn_dse_solrspark.id
-}
-*/
 
 # Subnet for user application client
 resource "aws_subnet" "sn_user_app" {
