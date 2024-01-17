@@ -70,9 +70,7 @@ variable "vpc_cidr_str_vpc" {
 variable "vpc_cidr_str_cassapp" {
    default = "191.100.20.0/24"
 }
-//variable "vpc_cidr_str_solrspark" {
-//   default = "191.100.30.0/24"
-//}
+
 variable "vpc_cidr_str_userapp" {
    default = "191.100.40.0/24"
 }
@@ -90,11 +88,7 @@ variable "vpc_cidr_str_userapp" {
 variable "dse_app_dc1_type" {
    default = "dc1"
 }
-/*
-variable "dse_app_dc2_type" {
-   default = "dse_app_dc2"
-}
-*/
+
 variable "user_application_client_type" {
    default = "client_app_server"
 }
