@@ -1,0 +1,9 @@
+- name: Create CDM container
+  docker_container:
+    name: "cassandra-data-migrator-container"
+    image: "docker.io/datastax/cassandra-data-migrator:4.1.11"
+    network_mode: host
+    restart_policy: unless-stopped
+    state: stopped
+  vars:
+    ansible_python_interpreter: python3

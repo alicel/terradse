@@ -61,3 +61,4 @@
     register: _dse_ver
   - debug:
      msg: "DSE Version: {{ _dse_ver.stdout }}; Cassandra Version: {{ _cassandra_ver.stdout }}"
+

@@ -1,0 +1,21 @@
+- name: Remove any preinstalled AWS CLI
+  apt:
+    update_cache: yes
+    name: "awscli"
+    state: absent
+
+- name: Download AWS CLI zip archive
+  get_url:
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /home/ubuntu/awscliv2.zip
+
+- name: Uncompress AWS CLI
+  unarchive:
+    src: /home/ubuntu/awscliv2.zip
+    dest: /home/ubuntu/
+    remote_src: yes
+
+- name: Remove archive
+  file:
+    path: /home/ubuntu/awscliv2.zip
+    state: absent

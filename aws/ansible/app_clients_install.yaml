@@ -1,15 +1,16 @@
-# Top-level playbook that initialises the application client instances for the ZDM Immersion Day training
+# Top-level playbook that initialises the application client instances for the SSTable Sideloader tests
 #
 # Requires an inventory file with a group called "clients" containing the public IPs of the application client instances, because we do not have a jumphost.
 # These are not EIPs so they will have to be changed every time.
+# This inventory file can be generated automatically with the init_running_app_clients.sh script.
+# All clients to be included in the inventory must be running when the above script is run.
 #
 # Things that it does:
 # - Install OpenJDK 11 and Maven
 # - Install Docker engine
-# - Install CQLSH
+# - Install CQLSH Astra
 # - Install NoSQLBench, create activity folder, upload activity
-# - Clone ZDM Demo Client
-# - Clone Themis and build it
+# - Install
 
 ---
 - name: Install Java packages and Docker engine
@@ -23,12 +24,12 @@
         name: "{{ java_packages }}"
         state: present
       vars:
-        java_packages: [ 'openjdk-11-jdk', 'maven' ]
+        java_packages: [ 'openjdk-11-jdk', 'maven', 'unzip' ]
 
-    - name: Clean up the Docker test container if it exists
-      docker_container:
-        name: "test"
-        state: absent
+#    - name: Clean up the Docker test container if it exists
+#      docker_container:
+#        name: "test"
+#        state: absent
     - name: Check if Docker Engine is already installed
       command: docker run --name test hello-world
       register: docker_installed
@@ -41,30 +42,51 @@
         name: "test"
         state: absent
 
+- name: Clean up home directory
+  hosts: clients
+  become: yes
+
+  tasks:
+    - name: Clean up /home/ubuntu
+      include_tasks: tasks/clean_up_home_dir.yaml
+
+
 - name: Install all CQL clients
   hosts: clients
 
   tasks:
-    - name: Clean up home directory
-      include_tasks: tasks/clean_up_home_dir.yaml
-
     - name: Install cqlsh-astra
       include_tasks: tasks/install_cqlsh.yaml
 
     - name: Install nb5
       include_tasks: tasks/install_nb5.yaml
 
-    - name: Install ZDM Demo Client
-      include_tasks: tasks/install_zdm_demo_client.yaml
+    - name: Create CDM container
+      include_tasks: tasks/install_cdm.yaml
 
-    - name: Install Themis
-      include_tasks: tasks/install_themis.yaml
+- name: Install the AWS CLI
+  hosts: clients
+  become: yes
 
+  tasks:
+    - name: Install the AWS CLI locally
+      include_tasks: tasks/install_awscli.yaml
 
+- name: Append node entries to /etc/hosts
+  hosts: clients
+  become: yes
 
-
-
-
-
-
+  tasks:
+    - name: Append DSE node 0 entry to /etc/hosts
+      lineinfile:
+        dest: /etc/hosts
+        line: "{{ dse0_priv_ip }} dse0"
+    - name: Append DSE node 1 entry to /etc/hosts
+      lineinfile:
+        dest: /etc/hosts
+        line: "{{ dse1_priv_ip}} dse1"
+    - name: Append DSE node 2 entry to /etc/hosts
+      lineinfile:
+        dest: /etc/hosts
+        line: "{{ dse2_priv_ip }} dse2"
 

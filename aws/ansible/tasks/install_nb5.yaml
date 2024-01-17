@@ -20,3 +20,4 @@
   copy:
     src: assets/cql-keyvalue-astra.yaml
     dest: /home/ubuntu/activities/
+

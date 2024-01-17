@@ -39,7 +39,7 @@
 # sudo chown -R ubuntu:docker /home/ubuntu/.docker
 - name: Change ownership of Docker internal directory to this user and docker group
   file:
-    path: "{{ home_dir }}/.docker"
-    owner: "{{ user_name }}"
+    path: "/home/ubuntu/.docker"
+    owner: "ubuntu"
     group: "docker"
     recurse: yes
