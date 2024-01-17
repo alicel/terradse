@@ -38,22 +38,22 @@ variable "region" {
 #
 variable "ami_id" {
    
-  # Ubuntu Server 18.04 LTS (HVM), SSD Volume Type (64-bit x86)
+   # Ubuntu Server 22.04 LTS (HVM), SSD Volume Type (64-bit x86), AMD
 
-  // us-east-1
-  //default = "ami-0bcc094591f354be2"
+   // us-east-1
+   //default = "ami-0c7217cdde317cfec"
 
-  // us-east-2
-  //default = "ami-0e82959d4ed12de3f"
+   // us-east-2
+   //default = "ami-05fb0b8c1424f266b"
 
-  // eu-west-1
-  //default = "ami-0e66021c377d8c8b4"
+   // eu-west-1
+   //default = "ami-0905a3c97561e0b69"
 
-  // us-west-1
-  //default = "ami-0e17790f211795d99"
+   // us-west-1
+   //default = "ami-0ce2cb35386fc22e9"
 
    // us-west-2
-   default = "ami-0a97be4c4be6d6cc4"
+   default = "ami-008fe2fc65df48dac"
 }
 
 #
@@ -77,9 +77,7 @@ variable "vpc_cidr_str_vpc" {
 variable "vpc_cidr_str_cassapp" {
    default = "191.100.20.0/24"
 }
-//variable "vpc_cidr_str_solrspark" {
-//   default = "191.100.30.0/24"
-//}
+
 variable "vpc_cidr_str_userapp" {
    default = "191.100.40.0/24"
 }
@@ -97,11 +95,7 @@ variable "vpc_cidr_str_userapp" {
 variable "dse_app_dc1_type" {
    default = "dc1"
 }
-/*
-variable "dse_app_dc2_type" {
-   default = "dse_app_dc2"
-}
-*/
+
 variable "user_application_client_type" {
    default = "app_client"
 }
@@ -110,7 +104,6 @@ variable "instance_count" {
    type = map
    default = {
       dc1 = 3
-      //dse_app_dc2 = 3
       app_client = 10
    }
 }
@@ -119,7 +112,6 @@ variable "instance_type" {
    type = map
    default = {
       dc1 = "t2.2xlarge"
-      //dse_app_dc2 = "t2.2xlarge"
       app_client = "t2.large"
    }
 }
