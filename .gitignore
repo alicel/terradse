@@ -13,3 +13,5 @@ aws/terraform/terraform.tfstate.backup
 /aws/terraform.tfstate
 /terradse.iml
 /aws/ansible/app_client_inventory
+/terradse-onboarding.iml
+/aws/terraform/origin_output.txt

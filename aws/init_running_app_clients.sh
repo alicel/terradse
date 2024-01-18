@@ -1,13 +1,12 @@
 #!/bin/bash
 
-
 print_help_message () {
   echo
   echo
   printf "Usage: ./init_running_app_clients.sh [ARG] \n"
   echo
   printf "Required argument: \n"
-  printf "  -k / --origin_ssh_private_key: relative or absolute path of the private SSH key to access the Origin instances \n"
+  printf "  -k: relative or absolute path of the private SSH key to access the Origin instances \n"
   echo
   printf "This script will exit now, please try again. \n"
   echo
@@ -16,10 +15,6 @@ print_help_message () {
 }
 
 # Parse named command-line arguments
-SHORT=k:,h
-LONG=origin_ssh_private_key:,help
-OPTS="$(getopt -o $SHORT -l $LONG -- "$@")"
-
 VALID_ARGUMENTS=$#
 
 if [ "$VALID_ARGUMENTS" -eq 0 ]; then
@@ -28,21 +23,17 @@ if [ "$VALID_ARGUMENTS" -eq 0 ]; then
   exit 1
 fi
 
-eval set -- "$OPTS"
-while :
+while getopts 'k:h' OPT
 do
-  case "$1" in
-    -k | --origin_ssh_private_key )
-      ORIGIN_SSH_KEY="$2"
-      shift 2
+  case "$OPT" in
+    k )
+      echo "option k " "$OPTARG"
+      ORIGIN_SSH_KEY="$OPTARG"
       ;;
-    -h | --help )
+    h )
+      echo "option h "
       print_help_message
       exit 1
-      ;;
-    --)
-      shift;
-      break
       ;;
     * )
       echo "Unknown option: $1"
@@ -96,4 +87,5 @@ printf "\nClient inventory file created\n"
 
 printf "\nRunning the client install playbook now\n\n"
 cd ansible || return
-ansible-playbook app_clients_install.yaml -u ubuntu --private-key "$ORIGIN_SSH_KEY" --extra-vars "dse0_priv_ip=$DSE0_IP dse1_priv_ip=$DSE1_IP dse2_priv_ip=$DSE2_IP" -i app_client_inventory
+echo "origin key " $ORIGIN_SSH_KEY
+ansible-playbook app_clients_install.yaml -u ubuntu --private-key "$ORIGIN_SSH_KEY" --extra-vars "dse0_priv_ip=$DSE0_IP dse1_priv_ip=$DSE1_IP dse2_priv_ip=$DSE2_IP priv_key_path=$ORIGIN_SSH_KEY" -i app_client_inventory

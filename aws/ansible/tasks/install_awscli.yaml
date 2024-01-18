@@ -4,6 +4,12 @@
     name: "awscli"
     state: absent
 
+- name: Install unzip if not yet present
+  apt:
+    update_cache: yes
+    name: "unzip"
+    state: present
+
 - name: Download AWS CLI zip archive
   get_url:
     url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
@@ -14,6 +20,9 @@
     src: /home/ubuntu/awscliv2.zip
     dest: /home/ubuntu/
     remote_src: yes
+
+- name: Run installation script
+  command: ./aws/install --update
 
 - name: Remove archive
   file:

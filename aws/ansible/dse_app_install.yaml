@@ -2,7 +2,7 @@
 # Get the current timestamp and register datastx debian packages
 - hosts: dse_app
   any_errors_fatal: true
-  become: true
+  become: yes
   become_method: sudo
   tasks:
   - name: Get the current timestamp
@@ -15,7 +15,7 @@
 # Install and configure DSE
 - hosts: dse_app
   any_errors_fatal: true
-  become: true
+  become: yes
   become_method: sudo
   vars:
     cluster_name: OriginCluster
@@ -30,7 +30,7 @@
   any_errors_fatal: true
   name: Start seed node 
   serial: 1
-  become: true
+  become: yes
   become_method: sudo
   vars:
     srvc_name: dse
@@ -42,7 +42,7 @@
   any_errors_fatal: true
   name: Start non-seed node one by one
   serial: 1
-  become: true
+  become: yes
   become_method: sudo
   vars:
     srvc_name: dse
@@ -62,3 +62,8 @@
   - debug:
      msg: "DSE Version: {{ _dse_ver.stdout }}; Cassandra Version: {{ _cassandra_ver.stdout }}"
 
+- hosts: dse_app
+  become: yes
+  tasks:
+  - name: Install AWS CLI on the DSE nodes
+    include_tasks: tasks/install_awscli.yaml

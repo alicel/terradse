@@ -18,7 +18,7 @@
   become: yes
 
   tasks:
-    - name: Install OpenJDK and Maven if not yet present
+    - name: Install OpenJDK, Maven and unzip if not yet present
       apt:
         update_cache: yes
         name: "{{ java_packages }}"
@@ -89,4 +89,16 @@
       lineinfile:
         dest: /etc/hosts
         line: "{{ dse2_priv_ip }} dse2"
+
+- name: Enable password-less SSH from application servers to DSE nodes
+  hosts: clients
+
+  tasks:
+    - name: Copy private key to application servers, renaming it to id_rsa
+      ansible.builtin.copy:
+        src: "{{ priv_key_path }}"
+        dest: /home/ubuntu/.ssh/id_rsa
+        owner: ubuntu
+        group: ubuntu
+        mode: '0400'
 
