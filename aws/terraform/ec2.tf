@@ -33,6 +33,9 @@ resource "aws_instance" "dse_app_dc1" {
 resource "aws_instance" "user_application_client" {
    ami            = var.ami_id
    instance_type  = lookup(var.instance_type, var.user_application_client_type)
+   root_block_device {
+      volume_size = 100
+   }
    count          = lookup(var.instance_count, var.user_application_client_type)
    key_name       = aws_key_pair.dse_terra_ssh.key_name
    subnet_id      = aws_subnet.sn_user_app.id
