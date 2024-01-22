@@ -1,9 +1,35 @@
-- name: Create CDM container
-  docker_container:
-    name: "cassandra-data-migrator-container"
-    image: "docker.io/datastax/cassandra-data-migrator:4.1.11"
-    network_mode: host
-    restart_policy: unless-stopped
-    state: stopped
-  vars:
-    ansible_python_interpreter: python3
+- name: Create the CDM directory
+  file:
+    path: /home/ubuntu/cdm
+    state: directory
+
+- name: Download the CDM jar
+  get_url:
+    url: https://github.com/datastax/cassandra-data-migrator/releases/download/4.1.11/cassandra-data-migrator-4.1.11.jar
+    dest: /home/ubuntu/cdm/cassandra-data-migrator-4.1.11.jar
+
+- name: Create the CDM assets directory
+  file:
+    path: /home/ubuntu/cdm/assets
+    state: directory
+
+- name: Download the Spark dependency jar
+  get_url:
+    url: https://archive.apache.org/dist/spark/spark-3.4.1/spark-3.4.1-bin-hadoop3-scala2.13.tgz
+    dest: /home/ubuntu/cdm/spark-3.4.1-bin-hadoop3-scala2.13.tgz
+
+- name: Uncompress the Spark dependency jar
+  unarchive:
+    src: /home/ubuntu/cdm/spark-3.4.1-bin-hadoop3-scala2.13.tgz
+    dest: /home/ubuntu/cdm/
+    remote_src: yes
+
+- name: Remove archive
+  file:
+    path: /home/ubuntu/cdm/spark-3.4.1-bin-hadoop3-scala2.13.tgz
+    state: absent
+
+- name: Download and save locally the CDM detailed properties file
+  get_url:
+    url: https://raw.githubusercontent.com/datastax/cassandra-data-migrator/main/src/resources/cdm-detailed.properties
+    dest: /home/ubuntu/cdm/assets/cdm.properties

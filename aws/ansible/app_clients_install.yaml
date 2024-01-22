@@ -6,11 +6,16 @@
 # All clients to be included in the inventory must be running when the above script is run.
 #
 # Things that it does:
-# - Install OpenJDK 11 and Maven
+# - Install OpenJDK 11 and Maven, plus some other required packages
 # - Install Docker engine
 # - Install CQLSH Astra
 # - Install NoSQLBench, create activity folder, upload activity
-# - Install
+# - Install DSBulk
+# - Install CDM and its Spark dependency
+# - Install AWS CLI
+# - Add the DSE server private IPs to /etc/hosts
+# - Enable passwordless SSH to the DSE servers
+
 
 ---
 - name: Install Java packages and Docker engine
@@ -18,13 +23,13 @@
   become: yes
 
   tasks:
-    - name: Install OpenJDK, Maven and unzip if not yet present
+    - name: Install OpenJDK, Maven and other required packages if not yet present
       apt:
         update_cache: yes
-        name: "{{ java_packages }}"
+        name: "{{ required_packages }}"
         state: present
       vars:
-        java_packages: [ 'openjdk-11-jdk', 'maven', 'unzip' ]
+        required_packages: [ 'openjdk-11-jdk', 'maven', 'unzip', 'libfuse2', 'jq' ]
 
 #    - name: Clean up the Docker test container if it exists
 #      docker_container:
@@ -61,7 +66,10 @@
     - name: Install nb5
       include_tasks: tasks/install_nb5.yaml
 
-    - name: Create CDM container
+    - name: Install DSBulk
+      include_tasks: tasks/install_dsbulk.yaml
+
+    - name: Install CDM as Jar
       include_tasks: tasks/install_cdm.yaml
 
 - name: Install the AWS CLI

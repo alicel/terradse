@@ -1,0 +1,15 @@
+- name: Download DSBulk
+  get_url:
+    url: https://downloads.datastax.com/dsbulk/dsbulk.tar.gz
+    dest: /home/ubuntu/dsbulk.tar.gz
+
+- name: Uncompress DSBulk
+  unarchive:
+    src: /home/ubuntu/dsbulk.tar.gz
+    dest: /home/ubuntu/
+    remote_src: yes
+
+- name: Remove archive
+  file:
+    path: /home/ubuntu/dsbulk.tar.gz
+    state: absent
