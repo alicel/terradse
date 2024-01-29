@@ -5,8 +5,8 @@
 
 - name: Download the CDM jar
   get_url:
-    url: https://github.com/datastax/cassandra-data-migrator/releases/download/4.1.11/cassandra-data-migrator-4.1.11.jar
-    dest: /home/ubuntu/cdm/cassandra-data-migrator-4.1.11.jar
+    url: https://github.com/datastax/cassandra-data-migrator/releases/download/4.1.12/cassandra-data-migrator-4.1.12.jar
+    dest: /home/ubuntu/cdm/cassandra-data-migrator-4.1.12.jar
 
 - name: Create the CDM assets directory
   file:
@@ -15,18 +15,18 @@
 
 - name: Download the Spark dependency jar
   get_url:
-    url: https://archive.apache.org/dist/spark/spark-3.4.1/spark-3.4.1-bin-hadoop3-scala2.13.tgz
-    dest: /home/ubuntu/cdm/spark-3.4.1-bin-hadoop3-scala2.13.tgz
+    url: https://archive.apache.org/dist/spark/spark-3.4.2/spark-3.4.2-bin-hadoop3-scala2.13.tgz
+    dest: /home/ubuntu/cdm/spark-3.4.2-bin-hadoop3-scala2.13.tgz
 
 - name: Uncompress the Spark dependency jar
   unarchive:
-    src: /home/ubuntu/cdm/spark-3.4.1-bin-hadoop3-scala2.13.tgz
+    src: /home/ubuntu/cdm/spark-3.4.2-bin-hadoop3-scala2.13.tgz
     dest: /home/ubuntu/cdm/
     remote_src: yes
 
 - name: Remove archive
   file:
-    path: /home/ubuntu/cdm/spark-3.4.1-bin-hadoop3-scala2.13.tgz
+    path: /home/ubuntu/cdm/spark-3.4.2-bin-hadoop3-scala2.13.tgz
     state: absent
 
 - name: Download and save locally the CDM detailed properties file
