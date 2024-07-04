@@ -34,19 +34,22 @@ variable "ami_id" {
   # Ubuntu Server 22.04 LTS (HVM), SSD Volume Type (64-bit x86), AMD
 
   // us-east-1
-  default = "ami-0c7217cdde317cfec"
+  default = "ami-0a0e5d9c7acc336f1"
 
   // us-east-2
-  //default = "ami-05fb0b8c1424f266b"
+  //default = "ami-003932de22c285676"
 
   // eu-west-1
-  //default = "ami-0905a3c97561e0b69"
+  //default = "ami-0932dacac40965a65"
 
   // us-west-1
-  //default = "ami-0ce2cb35386fc22e9"
+  //default = "ami-0ecaad63ed3668fca"
 
   // us-west-2
-  //default = "ami-008fe2fc65df48dac"
+  //default = "	ami-0075013580f6322a1"
+
+   // eu-west-3
+   // default = "ami-0062b622072515714"
 }
 
 #

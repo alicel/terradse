@@ -11,3 +11,5 @@ aws/terraform/terraform.tfstate.backup
 /terraform.tfstate
 /aws/terraform/myplan
 /aws/terraform.tfstate
+/aws/terraform/origin_output.txt
+/terradse.iml
