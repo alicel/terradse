@@ -8,7 +8,7 @@ backup_homedir: /home/automaton/dse_update_bkup
 #     for upgrade, dse_ver_target is the version to be upgraded to
 #
 dse_ver_major: 6.9
-dse_ver_minor: 0
+dse_ver_minor: 2
 dse_ver_target:  "{{ dse_ver_major }}.{{ dse_ver_minor }}"
 
 opsc_ver_target: 6.8.4
